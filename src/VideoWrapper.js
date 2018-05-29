@@ -99,16 +99,8 @@ class VideoWrapper extends Component {
     e.persist();
     clearTimeout(timer);
     this.setState({hideFlag:false});  
-    var x=e.clientX,
-        y=e.clientY;
-
-    var timer = setTimeout(function(){
-      var nowX=e.clientX;
-      var nowY=e.clientY;
-      if(x===nowX&&y===nowY){
-        this.setState({hideFlag:true});
-      }
-    }.bind(this),4000) 
+    var timer = setTimeout(()=>{
+        this.setState({hideFlag:true})},4000);
   }
 
   showControl(){
@@ -123,7 +115,7 @@ class VideoWrapper extends Component {
     return (
       <div className="Video-wrapper" ref={(wrapper)=>{this.wrapper=wrapper}}
             onMouseOut={this.hideControl}
-                onMouseMove={this.showControl}>
+            onMouseMove={this.showControlThenHide}>
         <div className="video" 
              ref={(videoBox)=>{this.videoBox=videoBox}}
              onDoubleClick={this.fullScreenHandler}>
